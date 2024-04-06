@@ -1,1 +1,1 @@
-# CS6120
+# CS6120 - Natural Language Processing

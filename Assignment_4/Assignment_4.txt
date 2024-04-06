@@ -1,0 +1,40 @@
+Q1: 
+
+	a) Differences in code from the proposed architecture in Google's patent:
+		1. Vocabulary Size: The original architecture trained the model on the standard WMT 2014 English-German and English-French datasets for
+							training, whereas, the code only used the given corpus for training which is just the input file for training. 
+		2. Embedding Table: The Google's proposed Transformer architecture uses separate input(encoder) and output(decoder) embeddings table, 
+							however, the given implementation only uses only single embeddings for both inputs and outputs. 
+		3. Regularization: The patent proposed two techniques of regularization i.e. Droput and Label Smoothing, but, the given implementation lacks
+							label smoothing which could have been used to improve the performance of the models. 
+		4. Positional Encoding: The transformer model uses positional encodings to track the order of the tokens in the input sequence, whereas, the
+								the code included as an option (pos_embed = True), it does not use the sinusidal as described in the original paper.
+		5. Evaluation: The implementation evaluates the performance using cross-entropy loss, while, the paper proposed metrics such as BLEU to 
+						generate the quality of generated sequences. 
+
+	b) Arguments why code is better: 
+		- To re-design the code, a configuration file is added "config.yml" because:
+			1. Readability: It makes the code more readable and maintainable, and provides a centralized place to view and modify hyper-parameters
+							instead of fat-finger any part of the code. 
+			2. Reusability: A config file makes code more recyclable by separating the logic and the configuration parameters. 
+			3. Scalability: As the code base of the project grows, having a separate configuration file makes it easier to manage larger codebase. 
+Q2:
+	a) Evaluate model's perplexity: 
+	   For training, the model showed diminshing effect on perplexity which means model was less perplexed to show new tokens. However, after 5000
+	   iteration, model showed increasing effect on validation dataset and that could be result of overfitting the model. To avoid such issues, model 
+	   can be incorporated with regularizations methods such as L1, L2, etc. 
+	
+	b) 
+	Most imppressive text generated: "In the mind contracts on fails. And so important, positically that companies in this section. The funnelent 
+									  of being on an element to cover claims plus exceed in usbank has forward reported offs. Instead, we would ut 
+									  own over directors cost for help. Of that, our float will be equire medicals feel 500s and a well-powerfly. 
+									  We are now soon because a certain his performance will nex managers, our five purchase accounting earnings 
+									  before corporate interest with me, Walter David Sokol and Greg Abel at MidAmerican Energy, though share might 
+									  away out the stands of millions of smaller currently anabrought while large dominane" have equercing a pane." 
+	
+	
+	High impact decisions behind the generated text: To generate this text, the following model configs were used to batch_size: 64, input_length: 32,
+													 embed_size: 128, sa_multihead_count: 8, sa_head_size: 128, pos_embed: true, include_mlp: true, 
+													 split: train, max_new_tokens: 10000, train_iters: 12000, eval_iters: 1000, and lr: 0.001. 
+
+		

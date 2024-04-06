@@ -1,0 +1,20 @@
+ModelConfig:
+  batch_size: 64
+  input_length: 32
+  embed_size: 128
+  sa_multihead_count: 8
+  sa_head_size: 128
+  pos_embed: true
+  include_mlp: true
+  split: train
+  max_new_tokens: 10000
+
+TrainingConfig:
+  train_iters: 12000
+  eval_iters: 1000
+  lr: 0.001
+
+InputConfig:
+  filepath: './WarrenBuffet.txt'
+  mode: 'r'
+
